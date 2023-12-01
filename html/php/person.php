@@ -18,7 +18,7 @@
 </head>
 <body>
     <div>
-  <form action='newpers.php' method="POST">
+  <form action='php/newpers.php' method="POST">
     <fieldset>
     <h1>Detaljer</h1>
     <p>
@@ -35,19 +35,16 @@
     </p>
     <p>
         Våning: <input type = "text" name = "etage" />
-    </p>
-    <p>
-        Telefonnummer: <input type = "text" name = "etage" />
-    </p>
-    <p>
-        email: <input type = "email" name = "email" />
-    </p>
+    </p> 
     <p>
         Telefonnummer: <input type = "text" name = "tel1" />
     </p>
     <p>
         Telefonnummer 2: <input type = "text" name = "tel2" />
     </p> 
+    <p>
+        email: <input type = "email" name = "email" />
+    </p>    
  <p>
       <input type = "submit" name = "submit" value = "Spara" />
     </p>
