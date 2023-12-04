@@ -3,9 +3,10 @@ version: '3'
 
 services:
   app:
-    image: adhocore/lemp:8.0
+    image: mylemp:1.0
     # For different app you can use different names. (eg: )
-    container_name: some-app
+    build: ./lemp/8.2.Dockerfile
+    container_name: telebok
     volumes:
       # app source code
       - ./html:/var/www/html
@@ -23,7 +24,11 @@ services:
       MYSQL_USER: usr
       MYSQL_PASSWORD: 123
       MYSQL_ROOT_HOST: "%"
+      XDEBUG_MODE: debug
+      XDEBUG_CONFIG: xdebug.client_host=host.docker.internal xdebug.client_port=9003
       # for postgres you can pass in similar env as for mysql but with PGSQL_ prefix
-  
+      # docker-php-ext-enable xdebug
+    extra_hosts:
+    - "host.docker.internal:host-gateway"  
 volumes:
   db_data: {}

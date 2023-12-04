@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 
-<?php
-    include 'db_connect.php';
-?>
+
 <style>
 <?php
     include 'formstyle.css';

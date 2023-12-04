@@ -1,44 +1,37 @@
-
-
-
-
 <?php
-
-/*ID	int(11) unsigned Auto Increment	
-FirstName	varchar(50)	
-LastName	varchar(50)	
-Adress	varchar(50)	
-Nr	varchar(50)	
-Vån	varchar(50) NULL
-*/
-
-
 header("Content-Type:application/json");
-if (isset($_GET['ID']) && $_GET['ID']!="") {
-	include('db.php');
-	$ID = $_GET['ID'];
-	$result = mysqli_query(
-	$con,
-	"SELECT * FROM `persons` WHERE ID=$ID");
-	if(mysqli_num_rows($result)>0){
-	$row = mysqli_fetch_array($result);
-    $ID = $row['ID'];  
-	$name = $row['FirstName'];
-	$lname = $row['LastName'];
-	$adress = $row['Adress'];
-    $nr = $row['Nr'];
-    $etage = $row['Vån'];
 
-	response($ID, $name, $lname, $adress, $nr, $etage, $sts, $message);
-	mysqli_close($con);
-	}else{
-		response(NULL, NULL,NULL, NULL, NULL,NULL, 200,"No Record Found");
-		}
-}else{
-	response(NULL, NULL,NULL, NULL, NULL,NULL, 400,"Invalid Request");
+
+
+if (isset($_GET['ID']) && $_GET['ID']!="") {
+	include('db_connect.php');
+	$sts = 0;
+	$ID = $_GET['ID'];
+
+	$stmt = $pdo->query("SELECT * FROM `persons` WHERE id=$ID");
+	while ($row = $stmt->fetch()) {
+		$ID = $row['id'];  
+		$name = $row['name'];
+		$lname = $row['lname'];
+		$adress = $row['adress'];
+		$nr = $row['nr'];
+		$email = $row['email'];
+		$etage = $row['etage'];
+		$sts++;
 	}
 
-function response($ID,$name,$lname,$adress,$nr, $etage, $sts, $message){
+	if($sts > 0) {
+    	response($ID, $name, $lname, $adress, $nr, $etage,$email, $sts, 'OK');
+		$pdo = NULL;
+	}
+	else{
+		response(NULL, NULL,NULL, NULL, NULL,NULL,NULL, 200,"No Record Found");
+	}
+}else{
+	response(NULL, NULL,NULL, NULL, NULL,NULL, NULL, 400,"Invalid Request");
+}
+
+function response($ID,$name,$lname,$adress,$nr, $etage,$email, $sts, $message){
 
 	$response['id'] = $ID;
 	$response['name'] = $name;
@@ -46,6 +39,7 @@ function response($ID,$name,$lname,$adress,$nr, $etage, $sts, $message){
 	$response['adress'] = $adress;
     $response['nr'] = $nr;
     $response['etage'] = $etage;
+	$response['email'] = $email;
     $response['sts'] = $sts;
     $response['message'] = $message;
 
