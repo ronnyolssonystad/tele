@@ -5,6 +5,8 @@ $(function(){
             page="php/person.php"        
         } else if (this.id == 'lista') {
             page="php/getPersons.php"
+            listPersons(page)
+            return
         } else {
             page="php/searchPerson.php"
         }
@@ -16,22 +18,26 @@ $(function(){
   });
 
 
- /* $(function(){
+ function listPersons(page) {
     $.ajax({
-    url: 'handler.php',
+    url: page,
     dataType: 'json',
     success: function(data) {
-        var table = $('<table />');
+        var table = $('<table id="teletable" align = "center" border="1px" />').addClass('styled-table')
+        var theader = $('<th " />').addClass('styled-table')
 
         var len = data.length;
         for(var i = 0; i < len; i++) {
             var row = $('<tr />');
-            var a = $('<a />').attr('href', '#').addClass('button');
+            var a = $('<a />').attr('href', '#').addClass('button').text('Edit');
 
             row.append($('<td />').append(a));
-            row.append($('<td />').html(data[i].id);
-            row.append($('<td />').html(data[i].name);
-
+            row.append($('<td />').html(data[i].id));
+            row.append($('<td />').html(data[i].name));
+            row.append($('<td />').html(data[i].lname));
+            row.append($('<td />').html(data[i].adress));
+            row.append($('<td />').html(data[i].email));
+            row.append($('<td />').html(data[i].nr));
             table.append(row);
         }
 
@@ -39,10 +45,26 @@ $(function(){
             // Do something
         });
 
-        $('#container').html(table);
+        $('#main').html(table);
+        // First create your thead section
+        $('#teletable').append('<thead><tr></tr></thead>');
+
+        // Then create your head elements
+        arr1=["Ändra","förnamn", "efternamn", "adress", "email", "telefon"];
+        $thead = $('#teletable > thead > tr:first');
+        for (var i = 0, len = arr1.length; i < len; i++) {
+            $thead.append('<th>'+arr1[i]+'</th>');
+        }
+
     }
-}); */
+}); 
 
+ }
+// First create your thead section
+$('#counterTableDomId3').append('<thead><tr></tr></thead>');
 
-
-
+// Then create your head elements
+$thead = $('#counterTableDomId3 > thead > tr:first');
+for (var i = 0, len = arr1.length; i < len; i++) {
+    $thead.append('<th>'+arr1[i]+'</th>');
+}
