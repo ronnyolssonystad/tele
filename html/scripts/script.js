@@ -24,15 +24,14 @@ $(function(){
     dataType: 'json',
     success: function(data) {
         var table = $('<table id="teletable" align = "center" border="1px" />').addClass('styled-table')
-        var theader = $('<th " />').addClass('styled-table')
-
+    
         var len = data.length;
         for(var i = 0; i < len; i++) {
             var row = $('<tr />');
-            var a = $('<a />').attr('href', '#').addClass('button').text('Edit');
+            var a = $('<a />').attr('href', `php/edit.php/${data[i].ID}`).text('Edit');
 
             row.append($('<td />').append(a));
-            row.append($('<td />').html(data[i].id));
+            //row.append($('<td />').html(data[i].ID));
             row.append($('<td />').html(data[i].name));
             row.append($('<td />').html(data[i].lname));
             row.append($('<td />').html(data[i].adress));
@@ -59,12 +58,4 @@ $(function(){
     }
 }); 
 
- }
-// First create your thead section
-$('#counterTableDomId3').append('<thead><tr></tr></thead>');
-
-// Then create your head elements
-$thead = $('#counterTableDomId3 > thead > tr:first');
-for (var i = 0, len = arr1.length; i < len; i++) {
-    $thead.append('<th>'+arr1[i]+'</th>');
 }

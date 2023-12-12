@@ -11,4 +11,8 @@ if ($pdo) {
 } else {
   die();
 }
+function save($res) {
+  var_dump($res);
+}
+
 ?>
