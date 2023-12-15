@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $res['nr'] = test_input($_POST["nr"]);
   $res['adress'] = test_input($_POST["adress"]);
   if (isset($_POST["ID"]) && $_POST["ID"]> 0) {
+      $res['id'] = $_POST["ID"];
       update($res); 
   }
 }
@@ -48,7 +49,7 @@ function test_input($data) {
 ?>
 
 <h2>Persondata</h2>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<form method="post" id="tele" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <input type="hidden" name="ID" value='<?php echo($res['ID']); ?>'>
 
   Förnamn: <input type="text" name="name" value='<?php echo($res['name']); ?>'>
@@ -63,7 +64,7 @@ function test_input($data) {
   <br><br>
   Telefon: <input type=text name="nr" value='<?php echo($res['nr']); ?>'>
   <br><br>
-  <input type="submit" name="submit" value="Spara" onclick="checkform();">  
+  <input type="submit" name="submit" value="Spara" onclick="checkform(names);">  
 </form>
 
 <?php
@@ -72,14 +73,17 @@ function test_input($data) {
 
 </body>
 <script>
+  var names=['name','lname', 'adress', 'nr']
   //JavaScript
-function checkform() {
-    if(document.frmMr.start_date.value == "") {
-        alert("please enter start_date");
-        return false;
-    } else {
-        document.frmMr.submit();
-    }
+function checkform(names) {
+    var i
+    form=document.getElementById("tele")
+    for(i=0; i < names.length; i++) {
+    if(form[names[i]].value.length == 0) {
+      alert("please enter " + names[i]);
+      return false;
+    } 
+  }
 }
 </script>
 </html>
