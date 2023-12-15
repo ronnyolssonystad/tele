@@ -2,7 +2,7 @@ $(function(){
     $("button").click(function(data){
         var page
         if (this.id == 'nytt') {
-            page="php/person.php"        
+            page="php/editperson.php"        
         } else if (this.id == 'lista') {
             page="php/getPersons.php"
             listPersons(page)

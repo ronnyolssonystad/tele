@@ -12,12 +12,31 @@ if ($pdo) {
   die();
 }
 function update($res) {
-  
 
+  $sql = "UPDATE persons SET ";
+  $keys=['name', 'lname', 'adress','nr' ,'etage','email'];
+  $num_data = [ 'nr', 'etage'];
+  $columns=['name','lname',	'adress','nr', 'etage', 'email'];
 
+  $index = 0;
+  foreach($keys as $key) {
+    if (in_array($key, $num_data)) {
+      $as = '';
+      if ($res[$key]=='') {
+        $data = 0;
+      }
+    } else {
+      $as = '\'';
+      $data='';
+    }
+    $sql = $sql.$columns[$index].' = ' .$as.$res[$key].$data.$as. ', ';
+    $index++;
+  }
+  $sql = rtrim($sql, ', ');
+  $sql = $sql.' WHERE id='.$res['id'];
 
   try {
-    $sql = "UPDATE persons SET lastname='Doe' WHERE id=2";
+    
     // Prepare statement
     $stmt= $GLOBALS['pdo']->prepare($sql);
    // execute the query
