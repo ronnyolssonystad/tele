@@ -45,21 +45,5 @@ function response($res, $sts, $message){
 	$json_response = json_encode($res);
 	echo $json_response;
 }
-function responsen($ID,$name,$lname,$adress,$nr, $etage,$email, $sts, $message){
-
-	$response['id'] = $ID;
-	$response['name'] = $name;
-	$response['lname'] = $lname;
-	$response['adress'] = $adress;
-    $response['nr'] = $nr;
-    $response['etage'] = $etage;
-	$response['email'] = $email;
-    $response['sts'] = $sts;
-    $response['message'] = $message;
-
-	$json_response = json_encode($response);
-	echo $json_response;
-}
-
 
 ?>

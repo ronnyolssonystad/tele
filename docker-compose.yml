@@ -5,7 +5,10 @@ services:
   app:
     image: mylemp:1.0
     # For different app you can use different names. (eg: )
-    build: ./lemp/8.2.Dockerfile
+    build: 
+      context: lemp
+      dockerfile: 8.2.Dockerfile
+
     container_name: telebok
     volumes:
       # app source code

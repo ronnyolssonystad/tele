@@ -33,7 +33,7 @@ function update($res) {
     $index++;
   }
   $sql = rtrim($sql, ', ');
-  $sql = $sql.' WHERE id='.$res['id'];
+  $sql = $sql.' WHERE id='.$res['ID'];
 
   try {
     

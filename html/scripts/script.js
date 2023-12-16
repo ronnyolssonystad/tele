@@ -2,7 +2,7 @@ $(function(){
     $("button").click(function(data){
         var page
         if (this.id == 'nytt') {
-            page="php/editperson.php"        
+            page = 'php/editpers.php'; //create record        
         } else if (this.id == 'lista') {
             page="php/getPersons.php"
             listPersons(page)
@@ -11,11 +11,25 @@ $(function(){
             page="php/searchPerson.php"
         }
           
-        $.ajax({url: page, success: function(result){
-            $("#main").html(result);
-        }});
+        //$.ajax({url: page, success: function(result){
+        //    $("#main").html(result);
+        //}
+        //});
+        result = prepareFrame(page)
+        $("#main").html(result);
+
+
+
     });
   });
+
+  function prepareFrame(src) {
+    var ifrm = document.createElement("iframe");
+    ifrm.setAttribute("src", src);
+    ifrm.style.width = "800px";
+    ifrm.style.height = "800px";
+    return ifrm
+}
 
 
  function listPersons(page) {

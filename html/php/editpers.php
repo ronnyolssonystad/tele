@@ -1,5 +1,11 @@
 <!DOCTYPE HTML>  
 <html>
+<style>
+<?php
+    include 'formstyle.css';
+?>
+</style>   
+
 <head>
 </head>
 <body>  
@@ -29,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $res['nr'] = test_input($_POST["nr"]);
   $res['adress'] = test_input($_POST["adress"]);
   if (isset($_POST["ID"]) && $_POST["ID"]> 0) {
-      $res['id'] = $_POST["ID"];
+      $res['ID'] = $_POST["ID"];
       update($res); 
   }
 }
