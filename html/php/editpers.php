@@ -13,7 +13,6 @@
 <?php
 // define variables and set to empty values
 require_once 'db_connect.php';
-
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
   $res['ID']=-1;
   $res['name']='';
