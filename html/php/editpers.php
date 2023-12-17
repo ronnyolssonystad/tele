@@ -13,7 +13,8 @@
 <?php
 // define variables and set to empty values
 require_once 'db_connect.php';
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && !isset($_GET['id'])) {
   $res['ID']=-1;
   $res['name']='';
   $res['lname']='';
@@ -22,6 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   $res['adress']='';
   $res['nr']='';  
   $res['ID']=createrec();
+}
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
+  getOnePerson($res, $_GET['id']);
 }
 
 

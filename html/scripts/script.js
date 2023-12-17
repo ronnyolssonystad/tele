@@ -2,7 +2,7 @@ $(function(){
     $("button").click(function(data){
         var page
         if (this.id == 'nytt') {
-            page = 'php/editpers.php'; //create record        
+            page = 'php/edit'; //create record        
         } else if (this.id == 'lista') {
             page="php/getPersons.php"
             listPersons(page)
@@ -42,7 +42,7 @@ $(function(){
         var len = data.length;
         for(var i = 0; i < len; i++) {
             var row = $('<tr />');
-            var a = $('<a />').attr('href', `php/edit.php/${data[i].ID}`).text('Edit');
+            var a = $('<a />').attr('href', `php/edit/${data[i].ID}`).text('Edit');
 
             row.append($('<td />').append(a));
             //row.append($('<td />').html(data[i].ID));

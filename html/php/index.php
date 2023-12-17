@@ -12,13 +12,13 @@ $url="";
 if (isset($req) && count($req) > 0) {
     $command=$req[1];
     switch ($command) {
-        case 'edit': $url="location: ./editpers.php";
+        case 'edit': $url="location: /php/editpers.php";
     }
 }
 if (isset($req) && count($req) > 1) {
     $url=$url.'?id='.$req[2];
 }
-if ($url<>"") {
+if ($url<>"") {    
     header($url);
     exit();
 }

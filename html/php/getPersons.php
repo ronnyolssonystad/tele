@@ -2,31 +2,16 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Content-Type:application/json");
-
+require_once ('db_connect.php');
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-	include('db_connect.php');
 	$sts = 0;
+	$res = [];
 	if (isset($_GET['ID'])) {
 		$querystr = "SELECT * FROM `persons` WHERE id=". $_GET['ID'];	
 	} else {
 		$querystr = "SELECT * FROM `persons`";
 	}
-	$n = 0;
-
-	$stmt = $pdo->query($querystr);
-	while ($row = $stmt->fetch()) {
-
-		$res[$n]['ID'] = $row['id'];  
-		$res[$n]['name'] = $row['name'];
-		$res[$n]['lname'] = $row['lname'];
-		$res[$n]['adress'] = $row['adress'];
-		$res[$n]['nr'] = $row['nr'];
-		$res[$n]['email'] = $row['email'];
-		$res[$n]['etage'] = $row['etage'];
-		$sts++;
-		$n++;
-	}
-
+	getPerson($querystr, $res, $sts);
 	if($sts > 0) {
     	response($res, $sts, 'OK');
 		$pdo = NULL;
@@ -45,5 +30,8 @@ function response($res, $sts, $message){
 	$json_response = json_encode($res);
 	echo $json_response;
 }
+
+
+
 
 ?>

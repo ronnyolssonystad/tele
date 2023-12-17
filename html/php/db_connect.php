@@ -54,5 +54,27 @@ function createrec() {
   $stmt->execute(['', '', '', '']);
   return $GLOBALS['pdo']->lastInsertId($sql);;
 }
+function getPerson($qry, &$res, &$sts){
+  $pdo=$GLOBALS['pdo'];
+	$n = 0;
+	$stmt = $pdo->query($qry);
+	while ($row = $stmt->fetch()) {
+
+		$res[$n]['ID'] = $row['id'];  
+		$res[$n]['name'] = $row['name'];
+		$res[$n]['lname'] = $row['lname'];
+		$res[$n]['adress'] = $row['adress'];
+		$res[$n]['nr'] = $row['nr'];
+		$res[$n]['email'] = $row['email'];
+		$res[$n]['etage'] = $row['etage'];
+		$sts++;
+		$n++;
+	}
+
+}
+function getOnePerson(&$res, $id) {
+  $query= "SELECT * FROM `persons` WHERE id=". $id;
+  getPerson($query, $res, $sts);
+}
 
 ?>
