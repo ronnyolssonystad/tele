@@ -27,7 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 
 echo '<table class="styled-table"> ';
-echo '<thead><tr><th>Namn</th><th>Enamn</th><th>Adress</th><th>Vån</th><th>email</th><th>Tel</th><th>Ändra</th></tr>
+echo '<thead>
+<tr>
+    <th>Namn</th>
+    <th>Enamn</th>
+    <th>Adress</th>
+    <th>Vån</th><th>
+    email</th>
+    <th>Tel</th>
+    <th>Ändra</th>
+    <th>Sopa</th>
+
+</tr>
 </thead>';
 
 for ($i = 0; $i < count($res); $i++){
@@ -50,6 +61,7 @@ for ($i = 0; $i < count($res); $i++){
         echo "<td class='styled-table'>".$email."</td>";
         echo "<td class='styled-table'>".$nr."</td>";
         echo "<td class='styled-table'><a href=/php/edit/".$id."><button>Ändra</button></a></td>";
+        echo "<td class='delete-button'><a href=/php/delete/".$id."><button >Sopa</button></a></td>";
         //echo "<td class='styled-table'>".$id."</td>";
     echo "</tr>";
 

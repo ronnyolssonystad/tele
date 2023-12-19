@@ -16,6 +16,13 @@ if (isset($req) && count($req) > 0) {
             break;
         case 'Persons' : $url="location: /php/Persons.php";
             break;
+        case 'delete' :
+            $url = "location: /php/deletePerson.php";
+            break;    
+        default:
+            echo("<P> Nothing to see here, dude :)</>");
+            exit();
+    
     }
 }
 if (isset($req) && count($req) > 1) {

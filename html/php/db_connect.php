@@ -77,6 +77,15 @@ function getOnePerson(&$res, $id) {
   getPerson($query, $res, $sts);
   $res=$res[0];
 }
+function deletePerson($id) {
+
+  $query= 'DELETE FROM persons WHERE id='. $id;
+  getPerson($query, $res, $sts);
+  if($sts == 0) {
+    echo('<p> '.$id.' Deleted </p>');
+  } 
+
+}
 
 
 
