@@ -75,6 +75,10 @@ function getPerson($qry, &$res, &$sts){
 function getOnePerson(&$res, $id) {
   $query= "SELECT * FROM `persons` WHERE id=". $id;
   getPerson($query, $res, $sts);
+  $res=$res[0];
 }
+
+
+
 
 ?>

@@ -4,22 +4,12 @@ $(function(){
         if (this.id == 'nytt') {
             page = 'php/edit'; //create record        
         } else if (this.id == 'lista') {
-            page="php/getPersons.php"
-            listPersons(page)
-            return
+            page='php/Persons';
         } else {
             page="php/searchPerson.php"
         }
-          
-        //$.ajax({url: page, success: function(result){
-        //    $("#main").html(result);
-        //}
-        //});
         result = prepareFrame(page)
-        $("#main").html(result);
-
-
-
+        $("#page").html(result);
     });
   });
 
@@ -42,7 +32,7 @@ $(function(){
         var len = data.length;
         for(var i = 0; i < len; i++) {
             var row = $('<tr />');
-            var a = $('<a />').attr('href', `php/edit/${data[i].ID}`).text('Edit');
+            var a = $('<a target="_self"/>').attr('href', `php/edit/${data[i].ID}`).text('Edit');
 
             row.append($('<td />').append(a));
             //row.append($('<td />').html(data[i].ID));
@@ -58,17 +48,18 @@ $(function(){
             // Do something
         });
 
-        $('#main').html(table);
+        $(table).append('<thead><tr></tr></thead>');;
         // First create your thead section
-        $('#teletable').append('<thead><tr></tr></thead>');
+        
 
         // Then create your head elements
         arr1=["Ändra","förnamn", "efternamn", "adress", "email", "telefon"];
-        $thead = $('#teletable > thead > tr:first');
+        thead = $('#teletable > thead > tr:first');
         for (var i = 0, len = arr1.length; i < len; i++) {
-            $thead.append('<th>'+arr1[i]+'</th>');
+            thead.append('<th>'+arr1[i]+'</th>');
         }
-
+        $(table).append(thead)
+        return table
     }
 }); 
 

@@ -13,6 +13,9 @@ if (isset($req) && count($req) > 0) {
     $command=$req[1];
     switch ($command) {
         case 'edit': $url="location: /php/editpers.php";
+            break;
+        case 'Persons' : $url="location: /php/Persons.php";
+            break;
     }
 }
 if (isset($req) && count($req) > 1) {

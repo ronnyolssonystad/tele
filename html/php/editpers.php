@@ -6,8 +6,7 @@
 ?>
 </style>   
 
-<head>
-</head>
+
 <body>  
 
 <?php
@@ -56,7 +55,6 @@ function test_input($data) {
   return $data;
 }
 ?>
-
 <h2>Persondata</h2>
 <form method="post" id="tele" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <input type="hidden" name="ID" value='<?php echo($res['ID']); ?>'>
