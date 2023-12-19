@@ -12,12 +12,11 @@ server {
   if ($request_filename ~ /adminer) {
     set $docroot "adminer";
   }
-
+  
   root "/var/www/${docroot}";
 
+ 
   location /php {
-      
-      
       try_files $uri $uri/ @nested;
 
       location ~ \.php$ {
@@ -34,6 +33,10 @@ server {
 
   location @nested {
       rewrite /php/(.*)$ /php/index.php?/$1 last;
+  }
+
+  if (!-e $request_filename) {
+    rewrite ^.*$ /index.php last;
   }
 
 
