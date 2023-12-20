@@ -16,8 +16,8 @@ $(function(){
   function prepareFrame(src) {
     var ifrm = document.createElement("iframe");
     ifrm.setAttribute("src", src);
-    ifrm.style.width = "800px";
-    ifrm.style.height = "800px";
+    ifrm.style.width = "1100px";
+    ifrm.style.height = "1100px";
     return ifrm
 }
 

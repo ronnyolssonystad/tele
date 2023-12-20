@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	$sts = 0;
 	$res = [];
 
-	$querystr = "SELECT * FROM `persons`";
+	$querystr = "SELECT * FROM persons where name <> ''";
 	getPerson($querystr, $res, $sts);
 	if($sts = 0) {
         echo '<p> No data </>';

@@ -8,6 +8,7 @@ $pdo = new PDO(
 
 if ($pdo) {
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  sanitize();
 } else {
   die();
 }
@@ -73,7 +74,7 @@ function getPerson($qry, &$res, &$sts){
 
 }
 function getOnePerson(&$res, $id) {
-  $query= "SELECT * FROM `persons` WHERE id=". $id;
+  $query= "SELECT * FROM `persons` WHERE id=". $id. 'and name <> ""';
   getPerson($query, $res, $sts);
   $res=$res[0];
 }
@@ -84,6 +85,18 @@ function deletePerson($id) {
   if($sts == 0) {
     echo('<p> '.$id.' Deleted </p>');
   } 
+
+}
+// delete all records without name more than 30 minutes old
+function sanitize(){
+  $pdo=$GLOBALS['pdo'];
+  $qry = "delete from persons where name='' and minute(timediff(current_timestamp,date_time)) >  1";
+  
+  if ($pdo->query($qry) === TRUE) {
+    return true;
+  } else {
+    return false;
+  }
 
 }
 
