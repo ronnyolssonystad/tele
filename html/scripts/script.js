@@ -68,3 +68,88 @@ $(function(){
 }); 
 
 }
+
+function csvJSON(csv){
+
+    var lines=csv.split("\n");
+  
+    var result = [];
+  
+    // NOTE: If your columns contain commas in their values, you'll need
+    // to deal with those before doing the next step 
+    // (you might convert them to &&& or something, then covert them back later)
+    // jsfiddle showing the issue https://jsfiddle.net/
+    var headers=lines[0].split(",");
+  
+    for(var i=1;i<lines.length;i++){
+  
+        var obj = {};
+        var currentline=lines[i].split(",");
+  
+        for(var j=0;j<headers.length;j++){
+            obj[headers[j]] = currentline[j];
+        }
+  
+        result.push(obj);
+  
+    }
+  
+    //return result; //JavaScript object
+    return JSON.stringify(result); //JSON
+  }
+  function readandconvert() {
+    var input = document.createElement('input');
+    input.type = 'file';
+
+    input.onchange = e => { 
+
+    // getting a hold of the file reference
+    var file = e.target.files[0]; 
+
+    // setting up the reader
+    var reader = new FileReader();
+    reader.readAsText(file,'UTF-8');
+
+   // here we tell the reader what to do when it's done reading...
+    reader.onload = readerEvent => {
+      var content = readerEvent.target.result; // this is the content!
+      var data = csvJSON(content);
+      download(data, "kalle.json")
+   }
+
+    }
+
+input.click();
+}
+function download(data, filename) {
+    // data is the string type, that contains the contents of the file.
+    // filename is the default file name, some browsers allow the user to change this during the save dialog.
+
+    // Note that we use octet/stream as the mimetype
+    // this is to prevent some browsers from displaying the 
+    // contents in another browser tab instead of downloading the file
+    var blob = new Blob([data], {type:'octet/stream'});
+
+    //IE 10+
+    if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+    }
+    else {
+        //Everything else
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        document.body.appendChild(a);
+        a.href = url;
+        a.download = filename;
+
+        setTimeout(() => {
+            //setTimeout hack is required for older versions of Safari
+
+            a.click();
+
+            //Cleanup
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }, 1);
+    }
+}
