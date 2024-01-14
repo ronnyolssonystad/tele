@@ -18,7 +18,10 @@ if (isset($req) && count($req) > 0) {
             break;
         case 'delete' :
             $url = "location: /php/deletePerson.php";
-            break;    
+            break;
+        case 'upload' :
+            $url = "location: /php/upload.php";
+            break;
         default:
             echo("<P> Nothing to see here, dude :)</>");
             exit();

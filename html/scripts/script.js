@@ -5,10 +5,14 @@ $(function(){
             page = 'php/edit'; //create record        
         } else if (this.id == 'lista') {
             page='php/Persons';
-        } else {
+        } else if (this.id == 'ladda') {
+            page='php/uploadfrm.php';
+        }
+        else {
             page="php/searchPerson.php"
         }
         result = prepareFrame(page)
+        $("#page").empty();
         $("#page").html(result);
     });
   });
