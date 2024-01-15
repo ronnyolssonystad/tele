@@ -113,8 +113,8 @@ function csvJSON(csv){
    // here we tell the reader what to do when it's done reading...
     reader.onload = readerEvent => {
       var content = readerEvent.target.result; // this is the content!
-      var data = csvJSON(content);
-      download(data, "kalle.json")
+      var data = parse(content);
+      download(JSON.stringify(data), file + '.json')
    }
 
     }
@@ -153,3 +153,56 @@ function download(data, filename) {
         }, 1);
     }
 }
+function parse(data) {
+    data = data.split('BEGIN:VCARD')
+    var objs = [] 
+    for (var i = 0; i < data.length; i++) {
+        objs.push(parseVCF(data[i]))
+    }
+    return objs
+}
+
+
+function parseVCF(input) {
+    var Re1 = /^(version|fn|title|org):(.+)$/i;
+    var Re2 = /^([^:;]+);([^:]+):(.+)$/;
+    var ReKey = /item\d{1,2}\./;
+    var fields = [];
+
+    input.split(/\r\n|\r|\n/).forEach(function (line) {
+        var results, key;
+
+        if (Re1.test(line)) {
+            results = line.match(Re1);
+            key = results[1].toLowerCase();
+            fields[key] = results[2];
+        } else if (Re2.test(line)) {
+            results = line.match(Re2);
+            key = results[1].replace(ReKey, '').toLowerCase();
+
+            var meta = {};
+            results[2].split(';')
+                .map(function (p, i) {
+                var match = p.match(/([a-z]+)=(.*)/i);
+                if (match) {
+                    return [match[1], match[2]];
+                } else {
+                    return ["TYPE" + (i === 0 ? "" : i), p];
+                }
+            })
+                .forEach(function (p) {
+                meta[p[0]] = p[1];
+            });
+
+            if (!fields[key]) fields[key] = [];
+
+            fields[key].push({
+                meta: meta,
+                value: results[3].split(';')
+            })
+        }
+    });
+
+    return fields;
+};
+
