@@ -58,19 +58,24 @@ function test_input($data) {
 <h2>Persondata</h2>
 <form method="post" id="tele" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <input type="hidden" name="ID" value='<?php echo($res['ID']); ?>'>
-
-  Förnamn: <input type="text" name="name" value='<?php echo($res['name']); ?>'>
-  <br><br>
-  Efternamn: <input type=text name="lname" value='<?php echo($res['lname']); ?>'>
-  <br><br>
-  E-mail: <input type="text" name="email" value='<?php echo($res['email']); ?>'>
-  <br><br>
-  Adress: <input type="text" name="adress" value='<?php echo($res['adress']); ?>'>
-  <br><br>
-  Vån: <input name="etage" type=text value='<?php echo($res['etage']); ?>'>
-  <br><br>
-  Telefon: <input type=text name="nr" value='<?php echo($res['nr']); ?>'>
-  <br><br>
+  <label for="name">Förnamn:</label>
+  <input type="text" name="name" value='<?php echo($res['name']); ?>'>
+  <br>
+  <label for="lname">Efternamn</label>
+  <input type=text name="lname" value='<?php echo($res['lname']); ?>'>
+  <br>
+  <label for="email">E-mail:</label>
+   <input type="text" name="email" value='<?php echo($res['email']); ?>'>
+  <br>
+  <label for="adress">Adress:</label>
+  <input type="text" name="adress" value='<?php echo($res['adress']); ?>'>
+  <br>
+  <label for="etage">Etage:</label>
+  <input name="etage" type=text value='<?php echo($res['etage']); ?>'>
+  <br>
+  <label for="nr">Telefon:</label>
+  <input type=text name="nr" value='<?php echo($res['nr']); ?>'>
+  <br>
   <input type="submit" name="submit" value="Spara" onclick="checkform(names);">  
 </form>
 

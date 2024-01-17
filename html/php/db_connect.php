@@ -74,7 +74,7 @@ function getPerson($qry, &$res, &$sts){
 
 }
 function getOnePerson(&$res, $id) {
-  $query= "SELECT * FROM `persons` WHERE id=". $id. 'and name <> ""';
+  $query= "SELECT * FROM `persons` WHERE id=". $id.' and name <> ""';
   getPerson($query, $res, $sts);
   $res=$res[0];
 }
