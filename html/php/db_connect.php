@@ -17,20 +17,31 @@ function update($res) {
   $sql = "UPDATE persons SET ";
   $keys=['name', 'lname', 'adress','nr' ,'etage','email'];
   $num_data = [ 'nr', 'etage'];
-  $columns=['name','lname',	'adress','nr', 'etage', 'email'];
-
+  
+  // trim result and check if the data make sense
+  if(!fixres($res)){
+    return(false);
+  }
   $index = 0;
   foreach($keys as $key) {
     if (in_array($key, $num_data)) {
       $as = '';
+      // create empty numerical data
+      if (!key_exists($key, $res)) {
+        $res[$key] = '';
+      }
       if ($res[$key]=='') {
         $data = 0;
       }
     } else {
+      // create empty text data with key if it do not exist
+      if (!key_exists($key,$res)) {
+        $res[$key] = '';
+      }
       $as = '\'';
       $data='';
     }
-    $sql = $sql.$columns[$index].' = ' .$as.$res[$key].$data.$as. ', ';
+    $sql = $sql.$keys[$index].' = ' .$as.$res[$key].$data.$as. ', ';
     $index++;
   }
   $sql = rtrim($sql, ', ');
@@ -48,6 +59,11 @@ function update($res) {
   } catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
   }
+}
+function createPerson($persdata) {
+  $id=createrec();
+  $persdata['ID'] = $id;
+  update($persdata);
 }
 function createrec() {
   $sql = "INSERT INTO persons (name, lname, adress,  email) VALUES (?,?,?,?)";
@@ -97,6 +113,21 @@ function sanitize(){
   } else {
     return false;
   }
+
+}
+function fixres(&$res) {
+  if ($res['name']=='' && $res['lname']=='' && ($res['email']== '' || $res['nr']=='')) {
+    return false;
+  }
+  $keys = array_keys($res);
+  foreach ($keys as $key) {
+    $res[$key] = trim ($res[$key], ";");
+    if (!is_numeric ($res[$key])) {
+      $res[$key] = str_replace(';', ' ', $res[$key]);
+    }
+  }
+  return true;
+
 
 }
 

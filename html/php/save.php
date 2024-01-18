@@ -1,5 +1,7 @@
 <?php
 
+
+require_once 'db_connect.php';
 // Retrieve JSON data from the POST request
 $jsonData = json_decode($_POST['jsonData'], true);
 
@@ -7,5 +9,9 @@ $jsonData = json_decode($_POST['jsonData'], true);
 // In this example, just echoing it back
 echo json_encode(['status' => 'success', 'data' => $jsonData]);
 
+for( $i = 0; $i < count($jsonData); $i++) {
+    $person = $jsonData[$i];
+    createPerson($person);
 
+}
 
