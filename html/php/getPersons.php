@@ -7,9 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	$sts = 0;
 	$res = [];
 	if (isset($_GET['ID'])) {
-		$querystr = "SELECT * FROM `persons` WHERE id=". $_GET['ID'];	
+		$querystr = "SELECT * FROM `persons` WHERE id=". $_GET['ID']. " order by lname";	
 	} else {
-		$querystr = "SELECT * FROM `persons`";
+		$querystr = "SELECT * FROM `persons` order by lname";
 	}
 	getPerson($querystr, $res, $sts);
 	if($sts > 0) {

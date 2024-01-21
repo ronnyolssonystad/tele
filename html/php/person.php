@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	include('db_connect.php');
 	$sts = 0;
 	if (isset($_GET['ID'])) {
-		$querystr = "SELECT * FROM `persons` WHERE id=". $_GET['ID'];	
+		$querystr = "SELECT * FROM `persons` WHERE id=". $_GET['ID'] ;	
 	} else {
-		$querystr = "SELECT * FROM `persons`";
+		$querystr = "SELECT * FROM `persons` order by lname";
 	}
 	$n = 0;
 

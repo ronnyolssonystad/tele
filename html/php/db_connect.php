@@ -122,6 +122,11 @@ function fixres(&$res) {
   $keys = array_keys($res);
   foreach ($keys as $key) {
     $res[$key] = trim ($res[$key], ";");
+    if ($key=='name' && str_contains($res[$key], ';')) {
+      $tmp=explode(';', $res[$key]);
+        $res['name'] = $tmp[1];
+        $res['lname'] = $tmp[0]; 
+    }
     if (!is_numeric ($res[$key])) {
       $res[$key] = str_replace(';', ' ', $res[$key]);
     }
